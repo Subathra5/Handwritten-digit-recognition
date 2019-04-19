@@ -12,14 +12,14 @@ library(readr)
 train <- read_csv("../input/train.csv")
 test <- read_csv("../input/test.csv")
 head(train[1:10])
-```
+
 
 
 # Create a 28*28 matrix with pixel color values
 m = matrix(unlist(train[10,-1]),nrow = 28,byrow = T)
 # Plot that matrix
 image(m,col=grey.colors(255))
-```
+
 
 
 
@@ -35,7 +35,7 @@ lapply(1:6,
                 )
 )
 par(mfrow=c(1,1)) # set plot options back to default
-```
+
 
 ## Train, Predict and Save
 
@@ -47,10 +47,10 @@ library(h2o)
 ## start a local h2o cluster
 localH2O = h2o.init(max_mem_size = '6g', # use 6GB of RAM of *GB available
                     nthreads = -1) # use all CPUs (8 on my personal computer :3)
-```
 
 
-```
+
+
 ## MNIST data as H2O
 train[,1] = as.factor(train[,1]) # convert digit labels to factor for classification
 train_h2o = as.h2o(train)
@@ -75,7 +75,7 @@ model =
 
 ## print confusion matrix
 h2o.confusionMatrix(model)
-```
+
 
 
 ## print time elapsed
@@ -94,5 +94,5 @@ write.csv(df_y_test, file = "submission-r-h2o.csv", row.names=F)
 
 ## shut down virutal H2O cluster
 h2o.shutdown(prompt = F)
-```
+
 
